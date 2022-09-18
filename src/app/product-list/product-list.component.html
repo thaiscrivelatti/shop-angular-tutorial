@@ -1,0 +1,32 @@
+<h2>Produtos</h2>
+
+<!-- *ngFor iterates over a list of objects -->
+<div *ngFor="let product of products">
+
+  <!-- [title] shows a text when hovering the link -->
+  <!-- [link] add a link to the datails page, route specified in app.modules, with id product as a parameter-->
+  <a [title] = "product.name + ' details'"
+    [routerLink]="['/products', product.id]">
+    <h3> {{ product.name }} </h3>
+  </a>
+
+  <!-- *ngIf : condition that only shows description if product has a description -->
+  <p *ngIf="product.description">
+    Description: {{ product.description }}
+  </p>
+
+  <!-- Use parentheses to bind the event to the method -->
+  <button type="button" (click)="share()">
+    Compartilhar
+  </button>
+
+  <!-- Adding an element as child component, -->
+  <!-- Binding product as a property -->
+  <!-- Binding onNotify() method as an event -->
+  <app-product-alerts
+    [product]="product"
+    (notify)="onNotify()">
+  </app-product-alerts>
+
+
+</div>
